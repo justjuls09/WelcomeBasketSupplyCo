@@ -1,0 +1,195 @@
+"""
+ASSIGNMENT 12B: SPRINT 5 - DATA PERSISTENCE
+Project: Welcome Basket Supply Co. – Welcome Kit System (V5.0)
+Developer: Julie Gavas
+"""
+
+import datetime
+
+CATALOG_FILE = "kit_catalog.txt"
+DATA_FILE = "kit_order_history.csv"
+HUMAN_REPORT = "packing_slip.txt"
+
+DEFAULT_KIT = "New_Employee"
+DEFAULT_QUANTITY = 1
+
+
+# -----------------------------
+# CONFIG LOADER (NO STUB)
+# -----------------------------
+def load_catalog():
+    catalog = {}
+
+    try:
+        with open(CATALOG_FILE, "r") as file:
+            for line in file:
+                line = line.strip()
+                if line == "":
+                    continue
+
+                parts = line.split(",")
+                if len(parts) != 2:
+                    continue
+
+                try:
+                    catalog[parts[0].strip()] = float(parts[1].strip())
+                except ValueError:
+                    continue
+
+    except FileNotFoundError:
+        print("ERROR: kit_catalog.txt not found.")
+        return None
+
+    return catalog
+
+
+# -----------------------------
+# IDENTITY PHASE
+# -----------------------------
+def get_identity_info():
+    return {
+        "name": input("Contact Name: ").strip(),
+        "business": input("Business Name: ").strip(),
+        "address": input("Street Address: ").strip(),
+        "unit": input("Unit/Suite: ").strip(),
+        "city": input("City: ").strip(),
+        "phone": input("Phone Number: ").strip()
+    }
+
+
+# -----------------------------
+# COLLECTION PHASE (NO STUB)
+# -----------------------------
+def collect_kit_order(catalog):
+    print("\n--- AVAILABLE KITS ---")
+    for kit, price in catalog.items():
+        print(f"{kit} - ${price:.2f}")
+
+    while True:
+        kit = input(f"Select Kit (default {DEFAULT_KIT}): ").strip()
+        if kit == "":
+            kit = DEFAULT_KIT
+        if kit in catalog:
+            break
+        print("Invalid kit selection.")
+
+    while True:
+        qty = input(f"Quantity (default {DEFAULT_QUANTITY}): ").strip()
+        if qty == "":
+            quantity = DEFAULT_QUANTITY
+            break
+        try:
+            quantity = int(qty)
+            if quantity > 0:
+                break
+        except ValueError:
+            pass
+        print("Please enter a valid whole number.")
+
+    return {
+        "kit": kit,
+        "quantity": quantity,
+        "unit_price": catalog[kit]
+    }
+
+
+# -----------------------------
+# CALCULATION PHASE
+# -----------------------------
+def calculate_total(order):
+    return order["unit_price"] * order["quantity"]
+
+
+# -----------------------------
+# PERSISTENCE PHASE (NO STUB)
+# -----------------------------
+def save_files(identity, order, total):
+    timestamp = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+
+    try:
+        with open(DATA_FILE, "a") as data:
+            data.write(
+                f"{timestamp},{identity['name']},{identity['business']},"
+                f"{order['kit']},{order['quantity']},{total:.2f}\n"
+            )
+
+        with open(HUMAN_REPORT, "w") as report:
+            report.write("WELCOME BASKET SUPPLY CO.\n")
+            report.write(f"Date: {timestamp}\n")
+            report.write(f"Customer: {identity['name']}\n")
+            report.write(f"Business: {identity['business']}\n")
+            report.write(f"Kit: {order['kit']}\n")
+            report.write(f"Quantity: {order['quantity']}\n")
+            report.write(f"Total: ${total:.2f}\n")
+
+    except Exception as e:
+        print(f"File error: {e}")
+
+
+# -----------------------------
+# REVIEW LOGIC (enumerate)
+# -----------------------------
+def review_history():
+    rows = []
+
+    try:
+        with open(DATA_FILE, "r") as file:
+            for line in file:
+                rows.append(line.strip().split(","))
+    except FileNotFoundError:
+        print("No history file found.")
+        return []
+
+    print("\n--- ORDER HISTORY ---")
+    for idx, row in enumerate(rows):
+        print(f"[{idx}] {row}")
+
+    return rows
+
+
+# -----------------------------
+# GREAT REWRITE
+# -----------------------------
+def edit_order():
+    rows = review_history()
+    if not rows:
+        return
+
+    try:
+        idx = int(input("Select order ID to edit: "))
+        new_qty = int(input("Enter new quantity: "))
+        unit_price = float(rows[idx][4])
+        rows[idx][3] = str(new_qty)
+        rows[idx][5] = f"{unit_price * new_qty:.2f}"
+    except:
+        print("Invalid edit.")
+        return
+
+    try:
+        with open(DATA_FILE, "w") as file:
+            for row in rows:
+                file.write(",".join(row) + "\n")
+        print("Order updated.")
+    except Exception as e:
+        print(f"Rewrite error: {e}")
+
+
+# -----------------------------
+# MAIN (NO SILENT CONDUCTOR)
+# -----------------------------
+def main():
+    catalog = load_catalog()
+    if not catalog:
+        return
+
+    identity = get_identity_info()
+    order = collect_kit_order(catalog)
+    total = calculate_total(order)
+    save_files(identity, order, total)
+
+    review_history()
+    if input("Edit an order? (y/n): ").lower() == "y":
+        edit_order()
+
+
+main()

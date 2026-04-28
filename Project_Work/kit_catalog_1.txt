@@ -1,0 +1,3 @@
+New_Employee,15.00
+VIP_Client,25.00
+Remote_Worker,20.00

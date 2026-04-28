@@ -1,0 +1,7 @@
+New_Employee,15.00
+VIP,25.00
+Remote_Worker,20.00
+Office,18.00
+Pet,12.00
+Baby,16.00
+Birthday,17.00
