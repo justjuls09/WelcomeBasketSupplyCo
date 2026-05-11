@@ -1,6 +1,14 @@
 """
 Welcome Basket Supply Co. — OOP Blueprint
 
+[x] 1. Streamlit Migration: Logic is successfully ported to a web UI.
+[x] 2. UI/UX Design: Layout is organized, intuitive, and easy to navigate.
+[x] 3. GitHub Integration: Full source code is pushed to a public repo.
+[x] 4. Live Deployment: The app is accessible via a Streamlit Cloud URL.
+[x] 5. System Resilience: UI elements handle invalid inputs gracefully.
+[x] 6. OOP Backend: The app still uses Classes/Objects to manage data.
+[x] 7. Data Persistence: System reads/writes to a .txt or .csv file.
+
 Deployment-ready WelcomeKitOrder class:
 - Encapsulation via private attributes
 - Getter/Setter methods for granular updates
