@@ -1,4 +1,146 @@
 """ 
+Sprint 9 (16A)  Modular OOP Refactor of Sprint 5 and updated for Sprint 9 Final
+Project: Welcome Basket Supply Co.  Welcome Kit System
+
+This file is the "Blueprint" (Class Definition) required for Sprint 9.
+- Encapsulation: private attributes using double underscores
+- Modular Setters: individual setter methods for granular updates
+- Display Logic: display_order() prints a numbered list for future editing
+- Use with: sprint9.py (main program)
+"""
+
+class WelcomeKitOrder:
+    
+    def __init__(
+        self,
+        contact_name: str,
+        business_name: str,
+        address: str,
+        unit: str,
+        city: str,
+        phone: str,
+        kit_name: str,
+        unit_price: float,
+        quantity: int,
+        timestamp: str,
+    ):
+        self.__timestamp = timestamp
+        self.__contact_name = contact_name
+        self.__business_name = business_name
+        self.__address = address
+        self.__unit = unit
+        self.__city = city
+        self.__phone = phone
+        self.__kit_name = kit_name
+        self.__unit_price = float(unit_price)
+        self.__quantity = int(quantity)
+
+    # -----------------
+    # Getters
+    # -----------------
+    def get_timestamp(self) -> str:
+        return self.__timestamp
+
+    def get_contact_name(self) -> str:
+        return self.__contact_name
+
+    def get_business_name(self) -> str:
+        return self.__business_name
+
+    def get_address(self) -> str:
+        return self.__address
+
+    def get_unit(self) -> str:
+        return self.__unit
+
+    def get_city(self) -> str:
+        return self.__city
+
+    def get_phone(self) -> str:
+        return self.__phone
+
+    def get_kit_name(self) -> str:
+        return self.__kit_name
+
+    def get_unit_price(self) -> float:
+        return self.__unit_price
+
+    def get_quantity(self) -> int:
+        return self.__quantity
+
+    # -----------------
+    # Setters (granular updates)
+    # -----------------
+    def set_contact_name(self, value: str) -> None:
+        self.__contact_name = value.strip()
+
+    def set_business_name(self, value: str) -> None:
+        self.__business_name = value.strip()
+
+    def set_address(self, value: str) -> None:
+        self.__address = value.strip()
+
+    def set_unit(self, value: str) -> None:
+        self.__unit = value.strip()
+
+    def set_city(self, value: str) -> None:
+        self.__city = value.strip()
+
+    def set_phone(self, value: str) -> None:
+        self.__phone = value.strip()
+
+    def set_kit_name(self, value: str) -> None:
+        self.__kit_name = value.strip()
+
+    def set_unit_price(self, value: float) -> None:
+        self.__unit_price = float(value)
+
+    def set_quantity(self, value: int) -> None:
+        value = int(value)
+        if value < 1:
+            value = 1
+        self.__quantity = value
+
+    # -----------------
+    # Business Logic
+    # -----------------
+    def calculate_total(self) -> float:
+        return float(self.__unit_price) * int(self.__quantity)
+
+    # -----------------
+    # Persistence Helpers
+    # -----------------
+    def to_row(self) -> list:
+        """CSV row format aligned to app.py header."""
+        return [
+            self.__timestamp,
+            self.__contact_name,
+            self.__business_name,
+            self.__address,
+            self.__unit,
+            self.__city,
+            self.__phone,
+            self.__kit_name,
+            f"{self.__unit_price:.2f}",
+            self.__quantity,
+            f"{self.calculate_total():.2f}",
+        ]
+
+    @staticmethod
+    def from_dict(row: dict):
+        """Create object from DictReader row."""
+        return WelcomeKitOrder(
+            timestamp=row.get("timestamp", "").strip(),
+            contact_name=row.get("contact", "").strip(),
+            business_name=row.get("business", "").strip(),
+            address=row.get("address", "").strip(),
+            unit=row.get("unit", "").strip(),
+            city=row.get("city", "").strip(),
+            phone=row.get("phone", "").strip(),
+            kit_name=row.get("kit", "").strip(),
+            unit_price=float(row.get("unit_price", 0) or 0),
+            quantity=int(float(row.get("quantity", 1) or 1)),
+        )""" 
 Sprint 6 (13B)  Modular OOP Refactor of Sprint 5
 Project: Welcome Basket Supply Co.  Welcome Kit System
 
