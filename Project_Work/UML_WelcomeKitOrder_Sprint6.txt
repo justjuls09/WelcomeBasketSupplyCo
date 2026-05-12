@@ -1,0 +1,43 @@
+UML – Sprint 6 WelcomeKitOrder
+
++-----------------------------------+
+|          WelcomeKitOrder          |
++-----------------------------------+
+| - __contact_name   : str          |
+| - __business_name  : str          |
+| - __address        : str          |
+| - __unit           : str          |
+| - __city           : str          |
+| - __phone          : str          |
+| - __kit_name       : str          |
+| - __unit_price     : float        |
+| - __quantity       : int          |
++-----------------------------------+
+| + __init__()                       |
+| + get_contact_name() : str         |
+| + get_business_name() : str        |
+| + get_address() : str              |
+| + get_unit() : str                 |
+| + get_city() : str                 |
+| + get_phone() : str                |
+| + get_kit_name() : str             |
+| + get_unit_price() : float         |
+| + get_quantity() : int             |
+| + set_contact_name(v) : None       |
+| + set_business_name(v) : None      |
+| + set_address(v) : None            |
+| + set_unit(v) : None               |
+| + set_city(v) : None               |
+| + set_phone(v) : None              |
+| + set_kit_name(v) : None           |
+| + set_unit_price(v) : None         |
+| + set_quantity(v) : None           |
+| + calculate_total() : float        |
+| + display_order() : None           |
+| + __str__() : str                  |
++-----------------------------------+
+
+Notes:
+- All attributes are private (double underscores).
+- Setters are individual so you can update ONE property at a time.
+- display_order() prints a numbered list

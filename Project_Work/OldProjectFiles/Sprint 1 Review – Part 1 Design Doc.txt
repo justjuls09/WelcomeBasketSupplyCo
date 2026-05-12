@@ -1,0 +1,111 @@
+Sprint 1 – Backwards Design Blueprint
+Project: Welcome Basket Brew Co. – Welcome Brew Menu
+Author: Julie Gavas
+Date: March 6, 2026
+---
+1. Human Output (What the Barista Sees)
+The human-facing output of this system is a clear, consistent, and easy-to-read cup label used by the barista or delivery coordinator.
+Human Outputs Include:
+- Drink Name (Housewarming Latte, Welcome‑Home Americano, Cozy Condo Cappuccino, Townhouse Toasted Mocha, New‑Keys Nitro Brew)
+- Size (Small, Medium, Large)
+- Milk Type (Dairy, Oat, Almond, Soy, Coconut)
+- Syrup Pumps (0.10 each)
+- Safety Notes (allergen confirmation)
+- Delivery Location (office number, department, or home unit)
+- Total Price
+- Order ID / Timestamp
+Human‑Facing Output Mockup:
+WELCOME BREW MENU – CUP LABEL
+---------------------------------------
+Drink: Housewarming Latte (Large)
+Milk: Oat
+Flavor Boosts: 2 pumps vanilla
+Safety Notes: Oat milk confirmed
+Drop-Off Spot: Apt 3B – Lakeside Residences
+Order ID: WB-2026-03-09-003B
+Total: $2.20
+2. Computer Output (What the System Must Remember)
+This is the mandatory schema — the minimum data the system must store.
+A. Pricing Tier (Required)
+Size	Themed Name	Price
+Small	Starter Sip	$1.00
+Medium	Welcome Mug	$1.50
+Large	Grand Opening Cup	$2.00
+Syrup Pump	Flavor Boost	$0.10 each
+B. Milk Options (Required)
+- Dairy
+- Oat
+- Almond
+- Soy
+- Coconut
+C. Delivery Location (Required)
+- Apartment number
+- Condo unit
+- Townhouse block
+- Department
+- Office number
+D. Themed Drink Menu (Set A)
+- Housewarming Latte
+- Welcome‑Home Americano
+- Cozy Condo Cappuccino
+- Townhouse Toasted Mocha
+- New‑Keys Nitro Brew
+3. The Problem (My “Soy Milk Incident”)
+During a new-home welcome event, a mislabeled drink containing soy milk was delivered to a customer with a severe soy allergy. This incident highlighted the need for a strict allergen-safe ordering system with clear milk tracking, accurate labeling, and reliable delivery information.
+4. The Resilience (Most Important Technical Sprint)
+The most important technical sprint is the Files Sprint. The system must reliably store drink orders, milk selections, syrup counts, and delivery locations. File handling ensures consistency, prevents allergen errors, and allows the system to “remember” customers.
+5. Alignment to Course Objectives
+- Structured Programming (Sequence, Selection, Iteration)
+- Logic Tools (UML, Flowcharts, Pseudocode)
+- Programming Terms (schema, parsing, data structures)
+- Variables & Data Types (strings, integers, lists, dictionaries)
+- Debugging (file paths, data extraction)
+- Functions with Parameters & Return Values
+- Working with Data Sources (Text Files, JSON)
+- Classes & Objects (Drink, Order, Customer)
+- Comments & Docstrings
+6. Terminal Flow Mockup (Computer Output)
+WELCOME BASKET BREW CO. – ORDER SYSTEM
+-----------------------------------------
+Loading drink menu...
+Loading pricing tiers...
+Loading allergen-safe milk list...
+
+Please select drink:
+1. Housewarming Latte
+2. Welcome‑Home Americano
+3. Cozy Condo Cappuccino
+4. Townhouse Toasted Mocha
+5. New‑Keys Nitro Brew
+
+User selects: 1
+
+Select size (S/M/L): L
+Select milk type: Oat
+Enter number of flavor boosts: 2
+Enter drop-off location: Apt 3B
+
+Calculating total price...
+Saving order to system...
+Generating cup label...
+Order complete!
+7. Flowchart Diagram (Text-Based Representation)
+START
+ ↓
+Select Drink
+ ↓
+Select Size
+ ↓
+Select Milk Type
+ ↓
+Enter Syrup Pumps
+ ↓
+Enter Delivery Location
+ ↓
+Calculate Total Price
+ ↓
+Save Order to File
+ ↓
+Generate Cup Label
+ ↓
+END

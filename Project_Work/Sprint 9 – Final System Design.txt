@@ -1,0 +1,152 @@
+### Sprint 9 – Final System Design Blueprint
+Project: Welcome Basket Supply Co. – Welcome Kit Ordering System  
+Author: Julie Gavas  
+Date: May 2026  
+
+-----------------------------------------------------------------------
+1. Human Output (What the User Sees)
+-----------------------------------------------------------------------
+
+The human-facing output of this system is a clear and organized order summary used by a delivery coordinator or business partner.
+
+Human Outputs Include:
+- Contact Name
+- Business Name
+- Delivery Address (including Unit/Suite)
+- City
+- Phone Number
+- Welcome Basket Type (e.g., New Employee, VIP Client, Remote Worker)
+- Quantity Ordered
+- Total Price
+- Timestamp of Order
+
+Example Output:
+
+WELCOME BASKET SUPPLY CO. – ORDER SUMMARY
+
+Customer: John Smith  
+Business: ABC Corporation  
+Delivery Address: 123 Main St, Apt 4B  
+City: Chicago  
+Phone: 555-123-4567  
+
+Basket Type: VIP Client  
+Quantity: 3  
+
+Total Cost: $75.00  
+Order Timestamp: 2026-05-09 14:32  
+
+-----------------------------------------------------------------------
+2. Computer Output (System Data Requirements)
+-----------------------------------------------------------------------
+
+The system must store structured data for each order.
+
+Required Data Fields:
+- timestamp (string)
+- contact_name (string)
+- business_name (string)
+- address (string)
+- unit (string)
+- city (string)
+- phone (string)
+- kit_name (string)
+- unit_price (float)
+- quantity (integer)
+- total (calculated float)
+
+System reads and writes this data to:
+- kit_catalog.txt (product pricing)
+- kit_order_history.csv (order history)
+
+-----------------------------------------------------------------------
+3. Basket Catalog (Product Options)
+-----------------------------------------------------------------------
+
+The system loads basket types and prices from a file.
+
+Example Catalog:
+- New Employee, $15.00
+- VIP Client, $25.00
+- Remote Worker, $20.00
+- Office Setup, $18.00
+- Pet Welcome, $12.00
+- Baby Welcome, $16.00
+- Birthday Basket, $17.00
+
+-----------------------------------------------------------------------
+4. The Problem (Real-World Use Case)
+-----------------------------------------------------------------------
+
+Businesses need a reliable system to create and track welcome basket deliveries for new employees, clients, or residents.
+
+Without a structured system:
+- Orders may be incomplete or incorrect
+- Delivery details may be missing
+- Tracking multiple orders becomes difficult
+
+This system solves those problems by:
+- Standardizing inputs
+- Storing order history
+- Providing clear summaries for each order
+
+-----------------------------------------------------------------------
+5. System Resilience (Key Technical Requirement)
+-----------------------------------------------------------------------
+
+The system is designed to prevent errors and handle incorrect input.
+
+Resilience features include:
+- Required field validation (contact name, address, city)
+- Quantity must be greater than 0
+- Safe file handling (fallback if catalog file is missing)
+- Preventing crashes from invalid data
+
+This ensures the system remains stable and user-friendly.
+
+-----------------------------------------------------------------------
+6. Alignment to Course Objectives
+-----------------------------------------------------------------------
+
+This system demonstrates:
+
+- Structured Programming (sequencing user inputs)
+- Selection (validation using if/else conditions)
+- Iteration (looping through orders)
+- Functions (modular reusable logic)
+- Data Persistence (reading/writing CSV files)
+- OOP (WelcomeKitOrder class for managing orders)
+- Debugging and error handling
+- User Interface Design (Streamlit web application)
+
+-----------------------------------------------------------------------
+7. System Flow (Process Overview)
+-----------------------------------------------------------------------
+
+START
+
+↓  
+User enters order details (form input)
+
+↓  
+System validates inputs (checks required fields)
+
+↓  
+User selects basket type and quantity
+
+↓  
+System calculates total price
+
+↓  
+Order is saved to session and CSV file
+
+↓  
+System displays updated order list
+
+↓  
+User may edit, delete, or download orders
+
+↓
+
+END
+``
